@@ -8,23 +8,17 @@ Takes in user password and sends email
         [TO DO]: get user email
     Return:
         sends email to given users/BCC(ers)
-
 written by Oscar Daum and Gloria Sun
-
 Notable Resources used:
     for general code: https://realpython.com/python-send-email/#sending-multiple-personalized-emails
     for multiple users/html text: https://docs.python.org/3/library/email.examples.html
-
-
 To Do:
     format html:
     find way to use securely: https://realpython.com/python-send-email/#sending-multiple-personalized-emails, \
     https://developers.google.com/gmail/api/quickstart/python
     import csv with users to send to: https://realpython.com/python-send-email/#sending-multiple-personalized-emails
-    format name instead of email appearing as sender
+    format name instead of email appearing as sender: https://stackoverflow.com/questions/44385652/add-senders-name-in-the-from-field-of-the-email-in-python
     automate it
-
-
     lines to change: 38
 '''
 
@@ -35,7 +29,7 @@ from email.headerregistry import Address
 from email.utils import make_msgid
 from email.message import EmailMessage
 
-sender_email = "theofficialleastace@gmail.com"
+sender_email = "krazykat829@gmail.com"
 password = input("Type your password and press enter: ")
 sender_name = input("sender name: ")
 
@@ -45,7 +39,7 @@ with open("template.txt") as f:
 def message(name, email, company):
     msg = EmailMessage()
     msg['Subject'] = "HooHacks Sponsorship Opportunities for " + company
-    msg['From'] = "theofficialleastace@gmail.com"
+    msg['From'] = sender_name + " <krazykat829@gmail.com>"
     msg['To'] = email
     msg['Cc'] = ""
     msg['Bcc'] = ""
@@ -68,3 +62,4 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             # Send email here
             server.login(sender_email, password)
             server.send_message(message(name, email, company))
+
